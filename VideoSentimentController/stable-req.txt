@@ -1,0 +1,19 @@
+# NOTE: Cryptography will throw an error if dependencies not met
+# More info: https://cryptography.io/en/latest/installation/
+
+Flask==0.10.1
+Jinja2==2.7.3
+MarkupSafe==0.23
+Werkzeug==0.9.6
+argparse==1.2.1
+cffi==0.8.2
+cryptography==0.4
+itsdangerous==0.24
+mongo==0.2.0
+mongoengine==0.8.7
+pyOpenSSL==0.14
+pycparser==2.10
+pymongo==2.7.1
+requests==2.3.0
+six==1.7.2
+wsgiref==0.1.2

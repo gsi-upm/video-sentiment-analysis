@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title> Video Sentiment Analysis </title>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="/static/style.css">
+    <script defer src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script defer src="//cdnjs.cloudflare.com/ajax/libs/d3/2.7.2/d3.min.js"></script>
+    <script defer src="{{ url_for('static', filename='popcorn-complete.min.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='speech.js') }}"></script>
+    <script defer src="{{ url_for('static', filename='video_data.js') }}"></script>
+  </head>
+
+  <body>
+    <div id="video-box">
+      <form id="start-options">
+        <label class="video-name">Video Name:</label>
+        <input class="video-name" type="text"></input><br>
+        <label class="video-link">Video Link:</label>
+        <input class="video-link" type="text"></input><br>
+        <label class="dictionary-list">Select a Dictionary</label>
+        <select id="dictionary-list">
+          <option value="spFinancial" restricted="false">Spanish finances - Paradigma</option>
+          <option value="enFinancial" restricted="true">English finances - Loughran and McDonald</option>
+          <option value="spFinancialEmoticon" restricted="false">Sp finances and emts - Paradigma</option>
+          <option value="enFinancialEmoticon" restricted="true">En finances and emts - Loughran and McDonald</option>
+        </select>
+        <label class="stored-transcript">
+          Select Existing Transcript or <i>Live Analysis:</i>
+        </label>
+        <select id="stored-transcripts">
+          <option id="live-analysis-option">Live Analysis</option>
+        </select><br>
+        <input class="submit" id="form-submit-button" type="submit" value="Submit"></input>
+      </form>
+      <div id="main-video"></div>
+      <div id="captions-bar">
+        <p id="subtitles"></p>
+      </div>
+      <div id="line-graph-box">
+        <h2 class="title" id="line-graph-title">Phrase vs. Sentiment Progression</h2>
+        <p class ="sentiment" id="hover-text"></p>
+        <p class="phrase" id="clicked-phrase"></p>
+        <svg class="graph" id="line-graph"></svg>
+      </div>
+      <div id="control-bar">
+        <button class="button" id="play">Play</button>
+        <button class="button" id="pause">Pause</button>
+        <button class="button" id="caption-show">Subtitles</button>
+        <select class="language" id="select-language" onchange="updateCountry()"></select>
+        <select class="country" id="select-country" onchange="updateSpeechLang()"></select>
+      </div>
+    </div>
+
+  <div class="time">
+    <input id="time-box" type="text" placeholder="Jump to time: (seconds)"></input>
+    <input id="time-box-submit" type="submit" value="Submit"></input>
+  </div>
+
+  <div class="footer">
+    <div id="full-transcript">
+      <h2 class="title">Full Transcript</h2>
+      <p></p>
+    </div>
+    <div id="footer-details">
+      <p>Placeholder Text</p>
+      <button id="full-transcript-button">Show Full Transcript</button>
+    </div>
+  </div>
+  </body>
+</html>
