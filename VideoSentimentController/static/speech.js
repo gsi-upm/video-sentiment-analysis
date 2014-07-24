@@ -8,7 +8,7 @@ function speechDataOptions(chosenDictInfo,
                            videoName) {
   'use strict';
 
-  var collectionName, finalTranscript,transcriptRequest;
+  var collectionName, finalTranscript, transcriptRequest;
 
   /**************************************
    * Speech Recognition
@@ -20,8 +20,6 @@ function speechDataOptions(chosenDictInfo,
   liveAnalysisSetup(chosenDictInfo, updateLineGraph);
   languageOptions();
 }
-
-
 
 /********************************
  * Initialize Speech Recognition
@@ -55,18 +53,19 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
           function (data) {
             // On success get value (to at most 3 decimals)
             // and update line graph and info boxes
-            currentSentiment = Math.round(parseFloat(data)*1000)/1000;
+            currentSentiment = Math.round(parseFloat(data) * 1000) / 1000;
             totalSentiment += currentSentiment;
             updateLineGraph({
               'line': currentLine,
-              'sentiment': currentSentiment,
+              'sentiment': currentSentiment
             });
             $('#current-sentiment p').text(currentSentiment);
             $('#total-sentiment p').text(totalSentiment);
             // Send information for recording in database once
             // sentiment is calculated
             storeRequest(currentSentiment, localStartTime);
-        });
+          }
+        );
       },
       // Request to store data
       storeRequest = function storeRequest(currentSentiment, localStartTime) {
@@ -90,7 +89,7 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
       splitInterimTrans = interimTranscript.split(' ');
       newWordCount = splitNewLine.length;
       prevWordCount = splitInterimTrans.length;
-      wordDifference = newWordCount-prevWordCount;
+      wordDifference = newWordCount - prevWordCount;
 
       // If whole phrase is done reset the interim transcript
       if (event.results[i].isFinal) {
@@ -116,7 +115,7 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
         $('#full-transcript p').text(finalTranscript);
 
         // Set new line as interim transcript
-	      interimTranscript = event.results[i][0].transcript;
+        interimTranscript = event.results[i][0].transcript;
         // Show caption and resize content accordingly
         // Note: Only affects if subtitles bar visible
         $('#subtitles').text(currentLine);
@@ -139,7 +138,6 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
     }
   };
 }
-
 
 /**************************
  * Speech Language Options
@@ -220,7 +218,7 @@ function languageOptions() {
        ['Lingua latīna',   ['la']]];
 
   // Populate language selection dropdown
-  for (var i=0; i < langs.length; i++) {
+  for (var i = 0; i < langs.length; i++) {
     langOpt = langs[i][0];
     langElem = document.createElement('option');
     langElem.textContent = langOpt;
@@ -249,7 +247,7 @@ function languageOptions() {
     } else {
       // Otherwise populate countries dropdown and display
       selectCountry.style.display = '';
-      for (var i=1; i <= countries; i++) {
+      for (var i = 1; i <= countries; i++) {
         countryOpt = langs[selectLanguage.options.selectedIndex][i][1];
         countryElem = document.createElement('option');
         countryElem.textContent = countryOpt;
@@ -258,8 +256,8 @@ function languageOptions() {
       }
     }
     // Make sure language is updated, in case only updateCountry was called
-   updateSpeechLang();
- };
+    updateSpeechLang();
+  };
 
   /*********************************************************************
    * Sets the initial country/language dropdown to default on page load

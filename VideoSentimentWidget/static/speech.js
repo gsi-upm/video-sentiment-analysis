@@ -20,7 +20,7 @@ function speechDataOptions(chosenDictInfo,
     // Start up speech recognition
     liveAnalysisSetup(chosenDictInfo, updateLineGraph);
     languageOptions();
-		return;
+    return;
   }
 
   /**********************************
@@ -32,51 +32,51 @@ function speechDataOptions(chosenDictInfo,
   // Get name of chosen transcript
   collectionName = String(transcriptSelectList[chosenTranscriptIndex].value);
   // Send a request to get transcript from the database
-  transcriptRequest = $.get('retrieve/' +
-                            encodeURI(collectionName.trim()
-                            ), function (data) {
-    var videoData,
-        fullVideoData = [];
+  transcriptRequest = $.get('retrieve/' + encodeURI(collectionName.trim()),
+    function (data) {
+      var videoData,
+          fullVideoData = [];
 
-    // If the collection was empty or nonexistent, alert the user of the problem
-    if (data.status === 400) {
-      window.alert('There has been an error trying to access the collection!');
-      return;
-    }
-    // Otherwise, loop through all the documents,
-    // Each contains a line except the first which contains the video link
-    $.each(data, function(index, value) {
-      // Link to video is stored in first database document
-      if (index === 0) {
-        $video = Popcorn.smart('#main-video', value.link);
-      } else {
-
-        // Set cues to add/remove data to/from graph
-        $video.cue(value.start, function () {
-          videoData = fullVideoData.slice(0, index);
-          updateLineGraph({
-            'liveAnalysis': false,
-            'videoData': videoData
-          });
-        });
-
-        // Have the rest of the links show up at the corresponding time
-        $video.footnote({
-          start: value.start,
-          end: value.end,
-          text: value.text,
-          target: '#subtitles'
-        });
-
-        // Append each line to the final transcript
-        finalTranscript += value.text + ' ';
-
-        // Create array containing sentiment values
-        fullVideoData.push([value.sentiment, value.text]);
+      // If the collection was empty or nonexistent,
+      // alert the user of the problem
+      if (data.status === 400) {
+        window.alert('There was an error trying to access the collection!');
+        return;
       }
-    });
+      // Otherwise, loop through all the documents,
+      // Each contains a line except the first which contains the video link
+      $.each(data, function(index, value) {
+        // Link to video is stored in first database document
+        if (index === 0) {
+          $video = Popcorn.smart('#main-video', value.link);
+        } else {
 
-  }, 'json');
+          // Set cues to add/remove data to/from graph
+          $video.cue(value.start, function () {
+            videoData = fullVideoData.slice(0, index);
+            updateLineGraph({
+              'liveAnalysis': false,
+              'videoData': videoData
+            });
+          });
+
+          // Have the rest of the links show up at the corresponding time
+          $video.footnote({
+            start: value.start,
+            end: value.end,
+            text: value.text,
+            target: '#subtitles'
+          });
+
+          // Append each line to the final transcript
+          finalTranscript += value.text + ' ';
+
+          // Create array containing sentiment values
+          fullVideoData.push([value.sentiment, value.text]);
+        }
+      });
+
+    }, 'json');
 
   // Once ready, set full transcript
   transcriptRequest.done(function () {
@@ -85,8 +85,6 @@ function speechDataOptions(chosenDictInfo,
 
   return transcriptRequest;
 }
-
-
 
 /********************************
  * Initialize Speech Recognition
@@ -120,16 +118,17 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
           function (data) {
             // On success get value (to at most 3 decimals)
             // and update line graph and info boxes
-            currentSentiment = Math.round(parseFloat(data)*1000)/1000;
+            currentSentiment = Math.round(parseFloat(data) * 1000) / 1000;
             totalSentiment += currentSentiment;
             updateLineGraph({
               'line': currentLine,
               'liveAnalysis': true,
-              'sentiment': currentSentiment,
+              'sentiment': currentSentiment
             });
             $('#current-sentiment p').text(currentSentiment);
             $('#total-sentiment p').text(totalSentiment);
-        });
+          }
+        );
       };
 
     // Loop through results
@@ -143,7 +142,7 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
       splitInterimTrans = interimTranscript.split(' ');
       newWordCount = splitNewLine.length;
       prevWordCount = splitInterimTrans.length;
-      wordDifference = newWordCount-prevWordCount;
+      wordDifference = newWordCount - prevWordCount;
 
       // If whole phrase is done reset the interim transcript
       if (event.results[i].isFinal) {
@@ -171,7 +170,7 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
         $('#full-transcript p').text(finalTranscript);
 
         // Set new line as interim transcript
-	      interimTranscript = event.results[i][0].transcript;
+        interimTranscript = event.results[i][0].transcript;
         // Show caption
         $('#subtitles').text(currentLine);
         // Send request to calculate sentiment
@@ -191,7 +190,6 @@ function liveAnalysisSetup(chosenDictInfo, updateLineGraph) {
     }
   };
 }
-
 
 /**************************
  * Speech Language Options
@@ -272,7 +270,7 @@ function languageOptions() {
        ['Lingua latīna',   ['la']]];
 
   // Populate language selection dropdown
-  for (var i=0; i < langs.length; i++) {
+  for (var i = 0; i < langs.length; i++) {
     langOpt = langs[i][0];
     langElem = document.createElement('option');
     langElem.textContent = langOpt;
@@ -301,7 +299,7 @@ function languageOptions() {
     } else {
       // Otherwise populate countries dropdown and display
       selectCountry.style.display = '';
-      for (var i=1; i <= countries; i++) {
+      for (var i = 1; i <= countries; i++) {
         countryOpt = langs[selectLanguage.options.selectedIndex][i][1];
         countryElem = document.createElement('option');
         countryElem.textContent = countryOpt;
@@ -310,7 +308,7 @@ function languageOptions() {
       }
     }
     // Make sure language is updated, in case only updateCountry was called
-   updateSpeechLang();
+    updateSpeechLang();
   };
 
   /*********************************************************************
