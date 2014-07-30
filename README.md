@@ -44,15 +44,15 @@ Usage
 
 Overview
 --------
-| Controller | Widget
-:---: | :---: | :---:
-**Analysis** | Live | Live and Existing
-**Database**| Storage | Access
+|              | Controller   | Widget            |
+|:------------:|:------------:|:-----------------:|
+| **Analysis** | Live         | Live and Existing |
+| **Database** | Storage Only | Access Only       |
 
 Notes
 -----
 <sup>1</sup> The cryptography library will fail to install if it is missing certain dependencies.
-More information is available at: https://cryptography.io/en/latest/installation/<br>
+More information is available [here](https://cryptography.io/en/latest/installation/).<br>
 <sup>2</sup> The language options can be modified at any time.<br>
 <sup>3</sup> Microphone permission will be required the first time the site loads.<br>
 <sup>4</sup> When using the controller, the data you see is recorded to a database in MongoDB.
