@@ -15,7 +15,7 @@ It can be also be used in a larger scope by providing sentiment analysis for vid
 
 Installation Instructions
 -------------------------
-Make a local copy of the folders containing the controller and widget (or one of them indiividually since they can function independently).
+Make a local copy of the folders containing the controller and widget (or one of them individually since they can function independently).
 Then, install the requirements<sup>1</sup> listed in the *stable-req.txt* file.
 
 Once the necessary libraries are installed, run the *server.py* file.
