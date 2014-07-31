@@ -13,11 +13,10 @@ A sentiment value is parsed from the result and displayed in a line graph.
 
 It can be also be used in a larger scope by providing sentiment analysis for video media.
 
-Installation instructions
+Installation Instructions
 -------------------------
-Make a local copy of the folder containing the controller and widget (or one of them alone since they work individually).
+Make a local copy of the folders containing the controller and widget (or one of them indiividually since they can function independently).
 Then, install the requirements<sup>1</sup> listed in the *stable-req.txt* file.
-It is recommended, but not strictly required, that you do this in a virtual environment.
 
 Once the necessary libraries are installed, run the *server.py* file.
 By default the sites will be available at:
@@ -27,16 +26,16 @@ By default the sites will be available at:
 Usage
 -----
 ####Live Analysis:
-1. Insert a video name (optional for widget) and link.
+1. Insert a video name (optional for the widget) and link.
 2. Select a dictionary.
-3. Select Live Analysis and press submit.
+3. Select Live Analysis and press Submit.
 4. Modify the language and country accordingly.<sup>2</sup>
-5. Press play to start recognition.<sup>3,4</sup>
-6. Press pause to stop recognition.
-7. Use the *Jump to time* text box to skip to a particular time in the video.<br>
+5. Press play to start recognition and play the video.<sup>3,4</sup>
+6. Press pause to stop recognition and pause the video.
+7. Use the *Jump to time* text box to skip to a particular time in the video.
 
-  **Warning:** The in-browser Google Speech Recognition API that this project uses relies on microphone input.
-  Thus, in order for it to work correctly, it is up to the user to redirect his/her sound output to a microphone.
+**Warning:** The in-browser Google Speech Recognition API that this project uses relies on microphone input.
+Thus, in order for it to work correctly, it is up to the user to redirect the video's sound output to his/her microphone.
 
 ####Existing Analysis:
 1. Select the transcript name and press submit.
@@ -46,18 +45,18 @@ Overview
 --------
 |              | Controller   | Widget            |
 |:------------:|:------------:|:-----------------:|
-| **Analysis** | Live         | Live and Existing |
+| **Analysis** | Live         | Live or Existing  |
 | **Database** | Storage Only | Access Only       |
 
 Notes
 -----
-<sup>1</sup> The cryptography library will fail to install if it is missing certain dependencies.
+<sup>1</sup> The cryptography library will fail to install if it is missing dependencies.
 More information is available [here](https://cryptography.io/en/latest/installation/).<br>
-<sup>2</sup> The language options can be modified at any time.<br>
+<sup>2</sup> The language options can be repeatedly modified at any time.<br>
 <sup>3</sup> Microphone permission will be required the first time the site loads.<br>
-<sup>4</sup> When using the controller, the data you see is recorded to a database in MongoDB.
-The default name is *transcript_collection*.<br>
+<sup>4</sup> When using the controller, the data is also recorded to a database in MongoDB.
+The default name is *transcript_database*.<br>
 <sup>5</sup> The data and subtitles will automatically adjust.<br>
 
-***General:***
-* The browser will repeatedly ask for microphone permission if SSL is not used.
+**General:**<br>
+The browser will repeatedly ask for microphone permission if SSL is not used.
