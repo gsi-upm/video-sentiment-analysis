@@ -313,11 +313,7 @@ $('#form-submit-button').click(function (event) {
       console.log('Live Analysis: ' + liveAnalysis);
       // If live analysis try to start recognition
       if (liveAnalysis) {
-        // Make sure microphone permission is given before starting, in order to
-        // avoid missed data
-        navigator.webkitGetUserMedia({audio: true}, function () {
-          $video.play();
-        });
+        $video.play();
         try {
           recognition.start();
         } catch (e) {

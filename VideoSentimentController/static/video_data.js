@@ -278,11 +278,7 @@ $('#form-submit-button').click(function (event) {
   // pause and recognition restart (every 60 secs)
 
   $('#play').click(function () {
-    // Make sure microphone permission is given before starting, in order to
-    // avoid missed data
-    navigator.webkitGetUserMedia({audio: true}, function () {
-      $video.play();
-    });
+    $video.play();
     recognition.start();
     videoPause = false;
   });
