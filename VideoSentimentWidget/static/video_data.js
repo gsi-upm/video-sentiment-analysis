@@ -19,9 +19,9 @@ $(document).ready(function () {
 
   // Get and list available transcripts in dropdown,
   // The blank is used as a false boolean server side
-  $.get('/retrieve/' + encodeURI(' '), function (data) {
+  $.get('retrieve/' + encodeURI(' '), function (data) {
     console.log(data);
-    var dataArray = data.split(',');
+    var dataArray = data.split(';;');
     // If transcripts available, create options for dropdown
     if (data !== '') {
       $.each(dataArray, function (index, name) {

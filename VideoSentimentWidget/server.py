@@ -10,6 +10,11 @@ import requests
 # Create new database for transcripts
 client = MongoClient()
 db = client.transcript_database
+try:
+    import config
+    db.authenticate(config.user, config.pwd)
+except ImportError:
+    pass
 collection = ''
 
 # More info: http://flask.pocoo.org/docs/quickstart/
@@ -52,6 +57,7 @@ def retrieveCollection(collectionName):
     # Note: collection name is the same as the video name originally provided
     if collectionName.strip():
         selectedCollection = db[collectionName]
+        print("Accessing: '{}'".format(collectionName))
         # Make sure a new collection was not created, if so delete it and abort
         if not selectedCollection.count():
             selectedCollection.drop()
@@ -69,11 +75,11 @@ def retrieveCollection(collectionName):
     collections = [name for name
                    in db.collection_names()
                    if not re.match(regex, name)]
-    print ', '.join(collections)
-    return Response(', '.join(collections))
+    print ';; '.join(collections)
+    return Response(';; '.join(collections))
 
 # Create development server with automatic SSL credentials
 # NOTE: Without SSL, microphone permission is repeatedly requested
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='localhost', port=8675, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=8675, ssl_context='adhoc')

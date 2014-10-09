@@ -10,6 +10,11 @@ import requests
 # Create new database for transcripts
 client = MongoClient()
 db = client.transcript_database
+try:
+    import config
+    db.authenticate(config.user, config.pwd)
+except ImportError:
+    pass
 collection = ''
 
 # More info: http://flask.pocoo.org/docs/quickstart/
@@ -70,4 +75,4 @@ def storeCollection(videoName):
 # NOTE: Without SSL, microphone permission is repeatedly requested
 if __name__ == '__main__':
     app.debug = True
-    app.run(host='localhost', port=8676, ssl_context='adhoc')
+    app.run(host='0.0.0.0', port=8676, ssl_context='adhoc')

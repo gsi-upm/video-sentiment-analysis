@@ -4,7 +4,7 @@
     <title> Video Sentiment Analysis </title>
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <script defer src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script defer src="//cdnjs.cloudflare.com/ajax/libs/d3/2.7.2/d3.min.js"></script>
     <script defer src="{{ url_for('static', filename='popcorn-complete.min.js') }}"></script>
