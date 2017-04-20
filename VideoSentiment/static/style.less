@@ -1,0 +1,295 @@
+// out: ./style.css, compress: true
+
+/***********************
+ *        Constants
+ **********************/
+@lightBlue: #0B6693;
+@darkBlue: #053349;
+
+@buttonFont: 1.5em;
+@formFont: 1.3em;
+@graphFont: 1.1em;
+@subtitleFont: 1.5em;
+
+@subtitleHeight: 50px;
+@videoHeight: 430px;
+@videoWidth: 100%;
+
+/***********************
+ *        Mixins
+ **********************/
+.BorderRadius(@radius) {
+  -webkit-border-radius: @arguments;
+  -moz-border-radius: @arguments;
+  -o-border-radius: @arguments;
+  border-radius: @arguments;
+}
+
+.LangCountrySelector {
+  background: @darkBlue;
+  border: none;
+  .BorderRadius(25px);
+  bottom: 1%;
+  color: white;
+  font-size: 100%;
+  font-weight: bold;
+  padding: .5%;
+}
+
+/***********************
+ *        Body
+ **********************/
+body {
+  background: @darkBlue;
+  font-family: 'Roboto';
+  margin: .25% 0;
+}
+
+/***********************
+ *        Video
+ **********************/
+#captions-bar {
+  background: black;
+  display: none;
+  height: @subtitleHeight;
+  overflow: auto;
+
+  #subtitles {
+    color: white;
+    font-weight: bold;
+    font-size: @subtitleFont;
+    margin: 0 auto;
+    padding: 1%;
+    position: relative;
+    text-align: center;
+  }
+}
+
+#control-bar {
+  visibility: hidden;
+  position: relative;
+
+  .button {
+    background: @lightBlue;
+    border: solid @darkBlue;
+    .BorderRadius(25px);
+    color: white;
+    font-size: @buttonFont;
+    margin: 1% 0 1% .5%;
+    padding: 1%;
+    cursor: pointer;
+  }
+
+  .country {
+    bottom: 1%;
+    .LangCountrySelector;
+    position: absolute;
+    right: 0;
+    top: 50%;
+  }
+
+  .language {
+    clear: right;
+    float: right;
+    .LangCountrySelector;
+  }
+}
+
+#main-video {
+  height: @videoHeight;
+  width: @videoWidth;
+}
+
+#video-box {
+  background: black;
+  margin: 0 auto;
+  min-height: 500px;
+  position: relative;
+  overflow: auto;
+  width: 50%;
+}
+
+/***********************
+ *        Form
+ **********************/
+#start-options {
+  background: @darkBlue;
+  color: white;
+  height: 100%;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+
+  #dictionary-list {
+    clear: both;
+    font-size: @formFont;
+    margin-left: 15%;
+  }
+
+  input {
+    &.video-link,
+    &.video-name {
+      display: inline-block;
+      font-size: @formFont;
+      padding-top: 1%;
+      position: relative;
+      top: 10%;
+      width: 60%;
+    }
+
+    // Form submit button
+    &.submit {
+      font-size: @formFont;
+    }
+  }
+
+  label {
+    &.dictionary-list,
+    &.stored-transcript {
+      clear: both;
+      float: left;
+      font-size: @formFont;
+      margin: 3% 0;
+      text-align: center;
+      width: 100%;
+    }
+
+    &.video-link {
+      clear: left;
+      display: inline-block;
+      font-size: @formFont;
+      margin: 0 5% 10% 0;
+      position: relative;
+      text-align: right;
+      top: 10%;
+      width: 30%;
+    }
+
+    &.video-name {
+      .video-link;
+      margin-bottom: 1%;
+    }
+  }
+
+  #stored-transcripts {
+    clear: both;
+    font-size: @formFont;
+    margin-left: 20%;
+    width: 60%;
+  }
+}
+
+
+/*********************
+ *     Line Graph
+ ********************/
+#line-graph-box {
+  background: white;
+  display: none;
+
+  .graph { // svg element
+    height: 100%;
+    width: 100%;
+
+    .axis {
+      line, path {
+        fill: none;
+        stroke: black;
+        shape-rendering: crispEdges;
+      }
+    }
+
+    .line {
+      fill: none;
+      stroke: @lightBlue;
+      stroke-width: 2px;
+    }
+  }
+
+  .phrase {
+    color: @darkBlue;
+    display: none;
+    font-size: .5em;
+  }
+
+  .sentiment {
+    color: @lightBlue;
+    display: none;
+    font-size: @graphFont;
+    margin: 0 auto;
+    padding-left: 5%;
+    position: relative;
+    text-align: right;
+    top: 4px;
+  }
+
+  .title {
+    color: @darkBlue;
+    display: inline;
+    font-size: @graphFont;
+    padding-left: 11%;
+    position: relative;
+    text-align: left;
+    top: 4px;
+  }
+}
+
+/*********************
+ *      Footer
+ ********************/
+.footer {
+  border-top: 2px solid white;
+  clear: both;
+}
+
+#footer-details {
+  background: black;
+
+  #full-transcript-button {
+    background: white;
+    border: none;
+    border-radius: 10px;
+    color: @darkBlue;
+    cursor: pointer;
+    float: right;
+    font-size: @buttonFont;
+    font-weight: bold;
+    margin: 1%;
+    padding: 1%;
+  }
+
+  p {
+    color: white;
+    float: left;
+    margin: 1%;
+  }
+}
+
+#full-transcript {
+  border-bottom: 2px solid white;
+  color: white;
+  display: none;
+  height: 90px;
+  overflow-y: auto;
+  resize: vertical;
+
+  p {
+    color: white;
+    display: inline;
+    float: right;
+    height: 100%;
+    text-align: left;
+    width: 80%;
+  }
+
+  .title {
+    color: white;
+    display: inline;
+    left: 3%;
+    margin: 0 auto;
+    padding: 30px 1% 40px;
+    position: relative;
+    top: 3%;
+  }
+}
